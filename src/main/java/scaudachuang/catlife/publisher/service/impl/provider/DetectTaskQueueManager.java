@@ -1,29 +1,35 @@
-package scaudachuang.catlife.publisher.service.provider;
+package scaudachuang.catlife.publisher.service.impl.provider;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import scaudachuang.catlife.publisher.config.RabbitMQConfig;
 import scaudachuang.catlife.publisher.config.TaskGetConfig;
-import scaudachuang.catlife.publisher.dao.DetectCatMapper;
+import scaudachuang.catlife.publisher.entity.DetectCatTask;
+import scaudachuang.catlife.publisher.service.impl.provider.message.DeleteMessageBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Service
+/**
+ * DetectTaskQueue（图片识别任务）的管理者
+ * 1. 负责任务包装提交到队列
+ * 2. 消息出错处理
+ * 3. 查询识别结果计数器
+ * @author best lu
+ * @since 2021/3/9
+ */
+@Component
 public class DetectTaskQueueManager implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
 
     private final ConcurrentHashMap<String, Integer> taskMapCache = new ConcurrentHashMap<>();
-
-    @Resource
-    private DetectCatMapper detectCatMapper;
 
     @Resource
     private TaskGetConfig config;
@@ -91,7 +97,7 @@ public class DetectTaskQueueManager implements RabbitTemplate.ConfirmCallback, R
         taskMapCache.remove(uuid);
         Message message = DeleteMessageBuilder
                 .onTable("detectcattask")
-                .addKey("taskId", uuid)
+                .addKey(new DetectCatTask.P_K(uuid))
                 .build();
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.Cat_Life_Exchange,
@@ -113,6 +119,13 @@ public class DetectTaskQueueManager implements RabbitTemplate.ConfirmCallback, R
         }
         int newTime = taskMapCache.get(uuid) + addTimes;
         if (newTime > config.getMAX_RETRY_TIME()) {
+            /*
+            这里可能会出现：消息队列中的任务还没有被消费，
+            但是重试次数已经超过了config.getMAX_RETRY_TIME()
+            所以要启用removeByKeyFromCacheAndDB，删除map中的和将要在数据库中出现的。
+
+            如何删除将要在数据库中出现的呢？利用消息队列，提交DELETE消息。
+             */
             removeByKeyFromCacheAndDB(uuid);
             return -1;
         }

@@ -1,11 +1,11 @@
-package scaudachuang.catlife.publisher.service.provider;
+package scaudachuang.catlife.publisher.service.impl.provider.message;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
+import scaudachuang.catlife.publisher.entity.PK;
 
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 public class DeleteMessageBuilder {
     private final DeleteMessage deleteMessage;
@@ -15,11 +15,11 @@ public class DeleteMessageBuilder {
     }
 
     public static DeleteMessageBuilder onTable(String tableName) {
-        return new DeleteMessageBuilder(new DeleteMessage(tableName, new HashMap<>()));
+        return new DeleteMessageBuilder(new DeleteMessage(tableName, null));
     }
 
-    public DeleteMessageBuilder addKey(String key, Object data) {
-        this.deleteMessage.getPrimaryKeyMap().put(key, data);
+    public DeleteMessageBuilder addKey(PK pk) {
+        this.deleteMessage.setPk(pk);
         return this;
     }
 

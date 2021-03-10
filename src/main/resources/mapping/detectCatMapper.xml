@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="scaudachuang.catlife.publisher.dao.DetectCatMapper">
-    <insert id="insert" parameterType="DetectCatTask" >
-        insert into detectcattask (taskid, resultClass, consumeTime, isDone)
-        values (#{taskId}, #{resultClass}, now(), #{isDone});
-    </insert>
+<!--    <insert id="insert" parameterType="DetectCatTask" >-->
+<!--        insert into detectcattask (taskid, resultClass, consumeTime, isDone)-->
+<!--        values (#{taskId}, #{resultClass}, now(), #{isDone});-->
+<!--    </insert>-->
 
     <select id="getResult" parameterType="string" resultType="string">
         select resultClass from detectcattask where taskId = #{taskId};
     </select>
-    <delete id="delete" parameterType="string">
-        delete from detectcattask where taskId = #{taskId};
-    </delete>
+<!--    <delete id="delete" parameterType="string">-->
+<!--        delete from detectcattask where taskId = #{taskId};-->
+<!--    </delete>-->
 </mapper>

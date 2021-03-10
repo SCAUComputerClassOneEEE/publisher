@@ -2,21 +2,26 @@ package scaudachuang.catlife.publisher;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import scaudachuang.catlife.publisher.dao.DetectCatMapper;
-import scaudachuang.catlife.publisher.entity.DetectCatTask;
-import scaudachuang.catlife.publisher.service.DetectService;
+import scaudachuang.catlife.publisher.entity.Cat;
+import scaudachuang.catlife.publisher.entity.CatLifeRecord;
+import scaudachuang.catlife.publisher.service.CatLifeService;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 @SpringBootTest
 class PublisherApplicationTests {
+
     @Resource
-    private DetectCatMapper DetectCatMapper;
+    private CatLifeService queueProviderService;
 
     @Test
     void contextLoads() {
-        System.out.println(DetectCatMapper.getResult("1"));
+        CatLifeRecord catLifeRecord = new CatLifeRecord();
+        catLifeRecord.setCatClass("sss");
+        Cat cat = new Cat();
+        cat.setCatClass("qqq");
+        queueProviderService.sub(catLifeRecord);
+        queueProviderService.sub(cat);
     }
 
 }
