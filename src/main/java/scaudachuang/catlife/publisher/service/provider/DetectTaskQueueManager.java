@@ -24,6 +24,7 @@ public class DetectTaskQueueManager implements RabbitTemplate.ConfirmCallback, R
 
     @Resource
     private DetectCatMapper detectCatMapper;
+
     @Resource
     private TaskGetConfig config;
 
