@@ -6,13 +6,13 @@ import scaudachuang.catlife.publisher.dao.CatMapper;
 import scaudachuang.catlife.publisher.dao.DetectCatMapper;
 import scaudachuang.catlife.publisher.entity.Cat;
 import scaudachuang.catlife.publisher.entity.DetectCatTask;
-import scaudachuang.catlife.publisher.service.DetectService;
+import scaudachuang.catlife.publisher.service.DetectorService;
 import scaudachuang.catlife.publisher.service.impl.provider.DetectTaskQueueManager;
 
 import javax.annotation.Resource;
 
 @Service
-public class DetectServiceImpl implements DetectService {
+public class DetectorServiceImpl implements DetectorService {
     @Resource
     private DetectCatMapper detectCatMapper;
     @Resource

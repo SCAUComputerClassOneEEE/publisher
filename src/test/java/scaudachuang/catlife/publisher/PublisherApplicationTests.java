@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import scaudachuang.catlife.publisher.entity.Cat;
 import scaudachuang.catlife.publisher.entity.CatLifeRecord;
-import scaudachuang.catlife.publisher.service.CatLifeService;
+import scaudachuang.catlife.publisher.service.WriterService;
 
 import javax.annotation.Resource;
 
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 class PublisherApplicationTests {
 
     @Resource
-    private CatLifeService queueProviderService;
+    private WriterService queueProviderService;
 
     @Test
     void contextLoads() {

@@ -2,7 +2,7 @@ package scaudachuang.catlife.publisher.service.impl;
 
 import org.springframework.stereotype.Service;
 import scaudachuang.catlife.publisher.entity.*;
-import scaudachuang.catlife.publisher.service.CatLifeService;
+import scaudachuang.catlife.publisher.service.WriterService;
 import scaudachuang.catlife.publisher.service.impl.provider.CatLifeQueueProvider;
 
 import javax.annotation.Resource;
@@ -11,20 +11,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class CatLifeServiceImpl implements CatLifeService {
+public class WriterServiceImpl implements WriterService {
 
     private static final Set<Class<?>> TABLE_SET;
 
     static {
         TABLE_SET = new HashSet<>();
-        try {
-            TABLE_SET.add(Cat.class);
-            TABLE_SET.add(CatLifeRecord.class);
-            TABLE_SET.add(CatOwner.class);
-            TABLE_SET.add(DetectCatTask.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        TABLE_SET.add(Cat.class);
+        TABLE_SET.add(CatLifeRecord.class);
+        TABLE_SET.add(CatOwner.class);
+        TABLE_SET.add(DetectCatTask.class);
+        TABLE_SET.add(Comments.class);
+        TABLE_SET.add(Follow.class);
+        TABLE_SET.add(HaveCat.class);
+        TABLE_SET.add(Memorandum.class);
+        TABLE_SET.add(Moments.class);
     }
 
     @Resource

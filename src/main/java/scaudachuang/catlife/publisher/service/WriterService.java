@@ -1,6 +1,6 @@
 package scaudachuang.catlife.publisher.service;
 
-public interface CatLifeService {
+public interface WriterService {
     /**
      *
      * @param o bean object

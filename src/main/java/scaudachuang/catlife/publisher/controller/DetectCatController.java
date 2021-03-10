@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import scaudachuang.catlife.publisher.config.TaskGetConfig;
 import scaudachuang.catlife.publisher.entity.Cat;
 import scaudachuang.catlife.publisher.entity.DetectCatTask;
-import scaudachuang.catlife.publisher.service.DetectService;
+import scaudachuang.catlife.publisher.service.DetectorService;
 
 import javax.annotation.Resource;
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class DetectCatController {
     private TaskGetConfig config;
 
     @Resource
-    private DetectService detectService;
+    private DetectorService detectorService;
 
     @RequestMapping(value = "/class",method = RequestMethod.POST)
     public String detectCat(@RequestParam("img") MultipartFile img) throws Exception {
@@ -28,12 +28,12 @@ public class DetectCatController {
 
         String s = UUID.randomUUID().toString();
         DetectCatTask detectCatTask = new DetectCatTask(s);
-        detectService.recordTask(detectCatTask, img);
+        detectorService.recordTask(detectCatTask, img);
         return s;
     }
 
     @RequestMapping(value = "/resultClass/{taskId}", method = RequestMethod.GET)
     public Cat getDetectTask(@PathVariable("taskId") String taskId) throws Exception {
-        return detectService.getTaskResult(taskId);
+        return detectorService.getTaskResult(taskId);
     }
 }

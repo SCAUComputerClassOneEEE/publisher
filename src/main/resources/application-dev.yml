@@ -11,10 +11,21 @@ spring:
     publisher-confirm-type: correlated
     host: localhost
     port: 5672
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    timeout: 5000
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: scaudachuang.catlife.publisher.entity
+
 
 detect:
   max-img-size: 3145728
