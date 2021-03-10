@@ -2,7 +2,6 @@ package scaudachuang.catlife.publisher.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import scaudachuang.catlife.publisher.config.RabbitMQConfig;
 import scaudachuang.catlife.publisher.config.TaskGetConfig;
 import scaudachuang.catlife.publisher.entity.Cat;
 import scaudachuang.catlife.publisher.entity.DetectCatTask;
@@ -24,8 +23,6 @@ public class DetectCatController {
     @RequestMapping(value = "/class",method = RequestMethod.POST)
     public String detectCat(@RequestParam("img") MultipartFile img) throws Exception {
         if (img.getSize() > config.getMAX_IMG_SIZE()){
-            System.out.println(img.getSize()/ 1024*1024);
-            System.out.println(config.getMAX_IMG_SIZE());
             throw new Exception("img too large.");
         }
 
@@ -35,7 +32,7 @@ public class DetectCatController {
         return s;
     }
 
-    @RequestMapping(value = "/class/{taskId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/resultClass/{taskId}", method = RequestMethod.GET)
     public Cat getDetectTask(@PathVariable("taskId") String taskId) throws Exception {
         return detectService.getTaskResult(taskId);
     }
