@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "detect.max-retry-times",
+      "type": "java.lang.String",
+      "description": "Description for detect.max-retry-times."
+    },
+    {
+      "name": "detect.max-task-cache",
+      "type": "java.lang.String",
+      "description": "Description for detect.max-task-cache."
+    },
+    {
+      "name": "detect.max-img-size",
+      "type": "java.lang.String",
+      "description": "Description for detect.max-img-size."
+    }
+  ]
+}

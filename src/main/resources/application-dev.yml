@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cat_life
+  rabbitmq:
+    password: guest
+    username: guest
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    host: localhost
+    port: 5672
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: scaudachuang.catlife.publisher.entity
+
+detect:
+  max-img-size: 3145728
+  max-retry-times: 10
+  max-task-cache: 1000
