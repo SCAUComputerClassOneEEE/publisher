@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import scaudachuang.catlife.publisher.config.RabbitMQConfig;
 import scaudachuang.catlife.publisher.config.TaskGetConfig;
 import scaudachuang.catlife.publisher.entity.DetectCatTask;
-import scaudachuang.catlife.publisher.service.impl.provider.message.DeleteMessageBuilder;
 import scaudachuang.catlife.publisher.util.DetectTaskCacheCounter;
 
 import javax.annotation.Resource;
@@ -27,6 +26,9 @@ public class DetectTaskQueueManager {
 
     @Resource
     private  DetectTaskCacheCounter cacheCounter;
+
+    @Resource
+    private CatLifeQueueProvider catLifeQueueProvider;
 
     @Resource
     private TaskGetConfig config;
@@ -57,15 +59,7 @@ public class DetectTaskQueueManager {
     * */
     public void removeByKeyFromCacheAndDB(String uuid) {
         cacheCounter.removeTask(uuid);
-        Message message = DeleteMessageBuilder
-                .onTable("detectcattask")
-                .addKey(new DetectCatTask.P_K(uuid))
-                .build();
-        rabbitTemplate.convertAndSend(
-                RabbitMQConfig.Cat_Life_Exchange,
-                RabbitMQConfig.Cat_Life_Delete_Routing,
-                message
-        );
+        catLifeQueueProvider.provideDeleteMessage("DetectCatTask",new DetectCatTask.P_K(uuid));
     }
 
     public int retryGetTask(String uuid) {

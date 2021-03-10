@@ -16,7 +16,6 @@ public class CatLifeQueueProvider {
     @Resource
     private RabbitTemplate rabbitTemplate;
 
-
     public void provideDeleteMessage(String tableName, PK pk) {
         Message build = DeleteMessageBuilder
                 .onTable(tableName)
