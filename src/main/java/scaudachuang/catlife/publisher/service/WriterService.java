@@ -12,4 +12,6 @@ public interface WriterService {
      * @param o bean object
      */
     void sub(Object o);
+
+    void mod(Object o);
 }

@@ -25,8 +25,6 @@ public class RabbitMQConfig  implements RabbitTemplate.ConfirmCallback, RabbitTe
     public static final String Detect_Cat_Task_Routing = "DetectCatTaskRouting";
     public static final String Cat_Life_Record_Queue = "CatLifeRecordQueue";
     public static final String Cat_Life_Record_Routing = "CatLifeRecordRouting";
-    public static final String Cat_Life_Delete_Queue = "CatLifeDeleteQueue";
-    public static final String Cat_Life_Delete_Routing = "CatLifeDeleteRouting";
     public static final String Cat_Life_Exchange = "CatLifeExchange";
 
     @PostConstruct
@@ -41,8 +39,6 @@ public class RabbitMQConfig  implements RabbitTemplate.ConfirmCallback, RabbitTe
     public Queue catLifeRecordQueue() {
         return new Queue(Cat_Life_Record_Queue, true);
     }
-    @Bean
-    public Queue catLifeDeleteQueue() { return new Queue(Cat_Life_Delete_Queue, true); }
 
     @Bean
     public DirectExchange catLifeExchange() {
@@ -53,8 +49,6 @@ public class RabbitMQConfig  implements RabbitTemplate.ConfirmCallback, RabbitTe
     public Binding detectCatTaskRouting() { return BindingBuilder.bind(detectCatTaskQueue()).to(catLifeExchange()).with(Detect_Cat_Task_Routing); }
     @Bean
     public Binding catLifeRecordRouting() { return BindingBuilder.bind(catLifeRecordQueue()).to(catLifeExchange()).with(Cat_Life_Record_Routing); }
-    @Bean
-    public Binding catLifeDeleteRouting() { return BindingBuilder.bind(catLifeDeleteQueue()).to(catLifeExchange()).with(Cat_Life_Delete_Routing); }
 
     /**
      * 消息确认

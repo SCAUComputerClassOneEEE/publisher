@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class Follow {
+public class Blacklist {
     private int nId;
     private int beNId;
     private Timestamp fDatetime;

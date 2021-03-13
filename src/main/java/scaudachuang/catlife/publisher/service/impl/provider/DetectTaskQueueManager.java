@@ -59,7 +59,7 @@ public class DetectTaskQueueManager {
     * */
     public void removeByKeyFromCacheAndDB(String uuid) {
         cacheCounter.removeTask(uuid);
-        catLifeQueueProvider.provideDeleteMessage("DetectCatTask",new DetectCatTask.P_K(uuid));
+        catLifeQueueProvider.provideDeleteMessage(new DetectCatTask(uuid));
     }
 
     public int retryGetTask(String uuid) {
