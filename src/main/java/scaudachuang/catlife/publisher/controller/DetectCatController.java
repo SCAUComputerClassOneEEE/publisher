@@ -32,7 +32,7 @@ public class DetectCatController {
         return s;
     }
 
-    @RequestMapping(value = "/resultClass/{taskId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/class/{taskId}", method = RequestMethod.GET)
     public Cat getDetectTask(@PathVariable("taskId") String taskId) throws Exception {
         return detectorService.getTaskResult(taskId);
     }
