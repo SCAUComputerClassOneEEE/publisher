@@ -4,18 +4,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 登录/user/status         POST,GET
- * 关注/user/attentions     POST,GET
- * 粉丝/user/fans           GET
- * 屏蔽/user/blacklist      POST
- * 动态/user/moments        POST,GET
- * 评论/user/comments       POST,GET
- * 备忘录/user/memorandums  POST,GET
+ * 标注后的DELETE、POST、GET代表访问资源方式
+ * 登录/users/status         POST,GET
+ * 关注/users/attentions     POST,GET
+ * 粉丝/users/fans           GET
+ * 屏蔽/users/blacklist      POST
+ * 动态/users/moments        POST,GET
+ * 评论/users/comments       POST,GET
+ * 备忘录/users/memorandums  POST,GET
  * @author best lu
  * @since 2021/3/10
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 }

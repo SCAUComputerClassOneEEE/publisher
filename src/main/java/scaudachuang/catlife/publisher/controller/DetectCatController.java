@@ -10,6 +10,12 @@ import scaudachuang.catlife.publisher.service.DetectorService;
 import javax.annotation.Resource;
 import java.util.UUID;
 
+/**
+ * 标注后的DELETE、POST、GET代表访问资源方式
+ * /cats/classes   POST 识别任务创建
+ * /cats/classes   GET 获取异步任务结果
+ * 识别任务控制器，提供创建任务和查询任务的 api
+ */
 @RestController
 @RequestMapping("/cat")
 public class DetectCatController {
@@ -20,7 +26,7 @@ public class DetectCatController {
     @Resource
     private DetectorService detectorService;
 
-    @RequestMapping(value = "/class",method = RequestMethod.POST)
+    @RequestMapping(value = "/classes",method = RequestMethod.POST)
     public String detectCat(@RequestParam("img") MultipartFile img) throws Exception {
         if (img.getSize() > config.getMAX_IMG_SIZE()){
             throw new Exception("img too large.");
@@ -32,7 +38,7 @@ public class DetectCatController {
         return s;
     }
 
-    @RequestMapping(value = "/class/{taskId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/classes/{taskId}", method = RequestMethod.GET)
     public Cat getDetectTask(@PathVariable("taskId") String taskId) throws Exception {
         return detectorService.getTaskResult(taskId);
     }

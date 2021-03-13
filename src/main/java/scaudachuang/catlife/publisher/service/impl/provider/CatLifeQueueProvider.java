@@ -19,6 +19,14 @@ public class CatLifeQueueProvider {
         provideMessage(opO, QueueCUDMessage.CUDType.D_TYPE);
     }
 
+    public void provideUpdateMessage(Object opO) {
+        provideMessage(opO, QueueCUDMessage.CUDType.U_TYPE);
+    }
+
+    public void provideInsertMessage(Object opO) {
+        provideMessage(opO, QueueCUDMessage.CUDType.C_TYPE);
+    }
+
     private void provideMessage(Object opO, QueueCUDMessage.CUDType opT) {
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.Cat_Life_Exchange,
@@ -29,13 +37,4 @@ public class CatLifeQueueProvider {
                         .build()
         );
     }
-
-    public void provideUpdateMessage(Object opO) {
-        provideMessage(opO, QueueCUDMessage.CUDType.U_TYPE);
-    }
-
-    public void provideInsertMessage(Object opO) {
-        provideMessage(opO, QueueCUDMessage.CUDType.C_TYPE);
-    }
-
 }
