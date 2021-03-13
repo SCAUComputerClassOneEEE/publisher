@@ -11,17 +11,11 @@ import javax.annotation.Resource;
 @SpringBootTest
 class PublisherApplicationTests {
 
-    @Resource
-    private WriterService queueProviderService;
-
     @Test
     void contextLoads() {
-//        CatLifeRecord catLifeRecord = new CatLifeRecord();
-//        catLifeRecord.setCatClass("sss");
-//        Cat cat = new Cat();
-//        cat.setCatClass("qqq");
-//        queueProviderService.sub(catLifeRecord);
-//        queueProviderService.sub(cat);
+        CatLifeRecord catLifeRecord = new CatLifeRecord();
+        Object o = (Object) catLifeRecord;
+        System.out.println(o.getClass());
     }
 
 }

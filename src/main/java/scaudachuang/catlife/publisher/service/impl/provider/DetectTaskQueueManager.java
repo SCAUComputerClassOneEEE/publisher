@@ -12,6 +12,7 @@ import scaudachuang.catlife.publisher.entity.DetectCatTask;
 import scaudachuang.catlife.publisher.util.DetectTaskCacheCounter;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * DetectTaskQueue（图片识别任务）的管理者
@@ -38,20 +39,21 @@ public class DetectTaskQueueManager {
 
     /**
      * 生产消息到消息队列
-     * @param uuid 任务id
      * @param img 任务图片数据
      * @throws Exception cache容量已满
      */
-    public void provideTask(String uuid, MultipartFile img) throws Exception {
+    public String provideTask(MultipartFile img) throws Exception {
         if (cacheCounter.getCacheSize() > config.getMAX_TASK_CACHE())
             throw new Exception("Out of task map cache error.");
         Message message = MessageBuilder.withBody(img.getBytes()).build();
+        String uuid = UUID.randomUUID().toString();
         CorrelationData correlationData = new CorrelationData(uuid);
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.Cat_Life_Exchange,
                 RabbitMQConfig.Detect_Cat_Task_Routing,
                 message,
                 correlationData);
+        return uuid;
     }
 
     /*

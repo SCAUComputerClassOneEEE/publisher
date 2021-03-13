@@ -1,5 +1,6 @@
 package scaudachuang.catlife.publisher.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,9 @@ import javax.annotation.Resource;
  * @author best lu
  * @since 2021/3/10
  */
+@Api(tags = "猫咪日常")
 @RestController
-@RequestMapping("/cat")
+@RequestMapping("/catLife")
 public class CatLifeController {
     @Resource
     private ReaderService readerService;
