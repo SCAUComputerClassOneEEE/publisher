@@ -16,12 +16,12 @@ class PublisherApplicationTests {
 
     @Test
     void contextLoads() {
-        CatLifeRecord catLifeRecord = new CatLifeRecord();
-        catLifeRecord.setCatClass("sss");
-        Cat cat = new Cat();
-        cat.setCatClass("qqq");
-        queueProviderService.sub(catLifeRecord);
-        queueProviderService.sub(cat);
+//        CatLifeRecord catLifeRecord = new CatLifeRecord();
+//        catLifeRecord.setCatClass("sss");
+//        Cat cat = new Cat();
+//        cat.setCatClass("qqq");
+//        queueProviderService.sub(catLifeRecord);
+//        queueProviderService.sub(cat);
     }
 
 }

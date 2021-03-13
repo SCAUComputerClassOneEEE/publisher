@@ -6,18 +6,20 @@ import scaudachuang.catlife.publisher.config.TaskGetConfig;
 import scaudachuang.catlife.publisher.entity.Cat;
 import scaudachuang.catlife.publisher.entity.DetectCatTask;
 import scaudachuang.catlife.publisher.service.DetectorService;
+import scaudachuang.catlife.publisher.service.WriterService;
 
 import javax.annotation.Resource;
 import java.util.UUID;
 
 /**
- * 标注后的DELETE、POST、GET代表访问资源方式
+ *
+ * 标注后的 DELETE、POST、GET代表访问资源方式
  * /cats/classes   POST 识别任务创建
  * /cats/classes   GET 获取异步任务结果
  * 识别任务控制器，提供创建任务和查询任务的 api
  */
 @RestController
-@RequestMapping("/cat")
+@RequestMapping("/cats")
 public class DetectCatController {
 
     @Resource
@@ -26,6 +28,12 @@ public class DetectCatController {
     @Resource
     private DetectorService detectorService;
 
+    @Resource
+    private WriterService writerService;
+
+    /*
+    https://ip:port/cats/classes
+     */
     @RequestMapping(value = "/classes",method = RequestMethod.POST)
     public String detectCat(@RequestParam("img") MultipartFile img) throws Exception {
         if (img.getSize() > config.getMAX_IMG_SIZE()){
