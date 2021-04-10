@@ -2,7 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="scaudachuang.catlife.publisher.dao.CatMapper">
-    <select id="getClass" parameterType="string" resultType="Cat">
-        select * from cat where catclass = #{catClass};
+    <select id="getClass"
+            parameterType="string"
+            resultType="Cat">
+        select * from cat
+        where catclass = #{catClass};
+    </select>
+
+    <select id="getAllOwnerSimpleHaveCatById"
+            resultType="scaudachuang.catlife.publisher.pojo.SimpleHaveCatInfoBar"
+            parameterType="int">
+        select catclass, havecatid, catname
+        from havecat
+        where ownerid = #{ownerId}
+        order by havecatid;
+    </select>
+
+    <select id="getAllOwnerSimpleHaveCatByIdAndCatClass"
+            resultType="scaudachuang.catlife.publisher.pojo.SimpleHaveCatInfoBar">
+        select catclass, havecatid, catname
+        from havecat
+        where ownerid = #{ownerId} and catclass = #{catClass}
+        order by havecatid;
+    </select>
+
+    <select id="getOneHaveCat"
+            resultType="scaudachuang.catlife.publisher.entity.HaveCat">
+        select *
+        from havecat
+        where ownerid = #{ownerId}
+          and catclass = #{catClass}
+          and havecatid = #{haveCatId};
     </select>
 </mapper>

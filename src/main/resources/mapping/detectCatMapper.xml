@@ -2,15 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="scaudachuang.catlife.publisher.dao.DetectCatMapper">
-<!--    <insert id="insert" parameterType="DetectCatTask" >-->
-<!--        insert into detectcattask (taskid, resultClass, consumeTime, isDone)-->
-<!--        values (#{taskId}, #{resultClass}, now(), #{isDone});-->
-<!--    </insert>-->
 
-    <select id="getResult" parameterType="string" resultType="string">
-        select resultClass from detectcattask where taskId = #{taskId};
+    <select id="getResult"
+            parameterType="scaudachuang.catlife.publisher.entity.Cat"
+            resultType="string">
+        select cat.catclass as catclass, introduction, headphoto
+        from detectcattask join cat on detectcattask.resultclass = cat.catclass
+        where detectcattask.taskid = #{taskId};
     </select>
-<!--    <delete id="delete" parameterType="string">-->
-<!--        delete from detectcattask where taskId = #{taskId};-->
-<!--    </delete>-->
 </mapper>

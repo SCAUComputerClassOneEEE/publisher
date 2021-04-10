@@ -39,7 +39,6 @@ public class DetectCatController {
         if (img.getSize() > config.getMAX_IMG_SIZE()){
             throw new Exception("img too large.");
         }
-
         return detectorService.recordTask(img);
     }
 

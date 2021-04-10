@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @Data
 @ApiModel(description = "识别任务")
 public class DetectCatTask {
+    private long intId;
     @ApiModelProperty(value = "任务凭证id")
     private String taskId;
     @ApiModelProperty(value = "识别结果，猫咪种类", notes = "任务未完成时，为unknown")

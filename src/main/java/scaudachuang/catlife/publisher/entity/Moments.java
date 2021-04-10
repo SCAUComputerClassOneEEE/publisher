@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @ApiModel(description = "猫圈动态")
@@ -21,4 +22,6 @@ public class Moments {
     private String carryPhoto;
     @ApiModelProperty(value = "评论数")
     private int comTime;
+
+    List<Comments> commentsList;
 }

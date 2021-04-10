@@ -1,5 +1,7 @@
 package scaudachuang.catlife.publisher.dao;
 
+import scaudachuang.catlife.publisher.entity.Cat;
+
 public interface DetectCatMapper {
-    String getResult(String taskId);
+    Cat getResult(String taskId);
 }

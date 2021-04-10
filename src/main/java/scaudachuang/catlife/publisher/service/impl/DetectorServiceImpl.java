@@ -14,8 +14,7 @@ import javax.annotation.Resource;
 public class DetectorServiceImpl implements DetectorService {
     @Resource
     private DetectCatMapper detectCatMapper;
-    @Resource
-    private CatMapper catMapper;
+
     @Resource
     private DetectTaskQueueManager manager;
 
@@ -25,17 +24,7 @@ public class DetectorServiceImpl implements DetectorService {
     }
 
     @Override
-    public Cat getTaskResult(String taskId) throws Exception {
-        if (manager.retryGetTask(taskId) == -1)
-            throw new Exception("illegal task id " + taskId + ".");
-
-        String cl = detectCatMapper.getResult(taskId);
-        if (cl != null) { // 识别完成
-            manager.removeByKeyFromCacheAndDB(taskId);
-            return catMapper.getCat(cl);
-        }
-        else { // 还在识别中
-            return null;
-        }
+    public Cat getTaskResult(String taskId) {
+        return detectCatMapper.getResult(taskId);
     }
 }

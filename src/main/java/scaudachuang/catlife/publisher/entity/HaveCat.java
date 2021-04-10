@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @ApiModel(description = "用户拥有的猫")
@@ -27,4 +28,9 @@ public class HaveCat {
     private String drugAllergy;
     @ApiModelProperty(value = "喜爱", notes = "复合多值属性需要格式保存")
     private String likes;
+
+    /*
+    * 一对多级联
+    * */
+    List<CatLifeRecord> catLifeRecordList;
 }

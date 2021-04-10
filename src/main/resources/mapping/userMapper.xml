@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scaudachuang.catlife.publisher.dao.UserMapper">
+    <select id="getUserFollowedInfoBar"
+            resultType="scaudachuang.catlife.publisher.pojo.CorrelationInfoBar"
+            parameterType="int">
+        select nId as id, fDatetime as fbDateTime, nickname, avatar
+        from follow join catowner on follow.nId = catowner.ownerId
+        where follow.beNId = #{id};
+    </select>
+
+    <select id="getUserBlackListedInfoBar"
+            resultType="scaudachuang.catlife.publisher.pojo.CorrelationInfoBar"
+            parameterType="int">
+        select nId as id, bDatetime as fbDateTime, nickname, avatar
+        from blacklist join catowner on blacklist.nId = catowner.ownerId
+        where blacklist.beNId = #{id};
+    </select>
+
+
+</mapper>

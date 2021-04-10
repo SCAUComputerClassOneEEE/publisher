@@ -1,6 +1,7 @@
 package scaudachuang.catlife.publisher.service.impl.provider;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Data;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,23 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class CatLifeQueueProvider {
+
+    @Data
+    public static class QueueCUDMessage {
+        private Class<?> beanCl;
+        private CUDType type;
+        private Object element;
+
+        public QueueCUDMessage(Class<?> beanCl, CUDType type, Object element) {
+            this.beanCl = beanCl;
+            this.type = type;
+            this.element = element;
+        }
+
+        public enum CUDType {
+            C_TYPE, U_TYPE, D_TYPE
+        }
+    }
 
     @Resource
     private RabbitTemplate rabbitTemplate;
